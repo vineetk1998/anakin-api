@@ -1,0 +1,25 @@
+name: Docker Image CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+
+  build-and-push:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Build the Docker image
+      env: 
+        DOCKERHUB_PASS: ${{ secrets.DOCKERHUB_PASS }}
+      run: |
+        docker build . --file Dockerfile --tag vineetk1998/anakin-api:latest
+        docker login -u vineetk1998 -p $DOCKERHUB_PASS
+        docker push vineetk1998/anakin-api:latest
+
+
