@@ -9,3 +9,4 @@ COPY . ./
 RUN chmod +x /code/start_server.sh
 RUN chown -R www-data:www-data /code
 CMD ["/code/start_server.sh"]
+EXPOSE 8000

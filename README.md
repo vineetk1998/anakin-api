@@ -1,7 +1,15 @@
 # anakin-api
 Python Django based application with ReST api exposed.
 
-## Devlopment
+
+## Run Locally
+Prerequisite: docker
+```bash
+docker run -p 8000:8000 vineetk199998/anakin-api:latest
+```
+You can access api hosted on [localhost:8000/api](localhost:8000/api)
+
+## Development
 
 ### Get Started
 ``` bash
@@ -19,6 +27,12 @@ python manage.py runserver
 cd anakin-api
 python manage.py makemigrations
 python manage.py migrate
+```
+
+## Build Image
+```bash
+cd anakin-api
+docker build -t anakin-api:latest .
 ```
 
 ## Problem Description

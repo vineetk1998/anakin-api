@@ -1,0 +1,66 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels: 
+    app: anakin-api
+  name: anakin-api
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: anakin-api
+  strategy:
+    type: Recreate
+  template:
+    metadata:
+      labels:
+        app: celery-beat
+    spec:
+      containers:
+        image: vineetk1998/anakin-api:tagname
+        name: anakin-api
+      restartPolicy: Always
+status: {}
+
+
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: anakin-api
+  name: anakin-api
+spec:
+  ports:
+  - name: "8000"
+    port: 8000
+    targetPort: 8000
+  selector:
+    app: anakin-api
+status:
+  loadBalancer: {}
+
+
+
+# Source: cueapp/templates/ingress.yaml
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: anakin-ingress
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+spec:
+  rules:
+  - host: a53a3eb10092e4e5b85b89d85dde452a-6bf47be1e6bcff40.elb.ap-south-1.amazonaws.com
+    http:
+      paths:
+      - path: /api
+        backend:
+            serviceName: anakin-api
+            servicePort: 8000
+  tls:
+  - secretName: cueapp-tls-cert
+    hosts:
+      - a53a3eb10092e4e5b85b89d85dde452a-6bf47be1e6bcff40.elb.ap-south-1.amazonaws.com
+

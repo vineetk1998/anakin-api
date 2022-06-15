@@ -10,6 +10,7 @@ For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.2/ref/settings/
 """
 
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -24,8 +25,36 @@ SECRET_KEY = 'django-insecure-0wu-#noa=g8cstk@z4oq&f+6nu+uh)8-mi-tu)4+52aa+piabz
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+CSRF_TRUSTED_ORIGINS = ["localhost"]
+CORS_ORIGIN_WHITELIST = ["http://localhost:8000"]
+CORS_ALLOW_CREDENTIALS = True
+ALLOWED_HOSTS = ["*", "localhost"]
+CORS_ORIGIN_ALLOW_ALL = True
 
-ALLOWED_HOSTS = []
+INFO = os.environ.get("LOG_LEVEL", "INFO")
+LOGGING = {
+    "version": 1,
+    "disable_existing_loggers": False,
+    "formatters": {
+        "file": {
+            "format": "[%(asctime)s] %(levelname)s [%(name)s:%(lineno)s] [%(threadName)s] %(message)s",
+            "datefmt": "%d/%b/%Y %H:%M:%S",
+        },
+        "console": {
+            "format": "%(asctime)s [%(name)s:%(lineno)s] %(levelname)-8s %(message)s"
+        },
+    },
+    "handlers": {
+        "console": {
+            "class": "logging.StreamHandler",
+            "formatter": "console",
+            "level": INFO,
+        }
+    },
+    "loggers": {"": {"level": INFO, "handlers": ["console"]}},
+}
+
+
 
 
 # Application definition
