@@ -44,30 +44,6 @@ spec:
 status:
   loadBalancer: {}
 
-
-
-# apiVersion: extensions/v1beta1
-# kind: Ingress
-# metadata:
-#   name: anakin-ingress
-#   annotations:
-#     kubernetes.io/ingress.class: nginx
-#     kubernetes.io/tls-acme: "true"
-#     cert-manager.io/cluster-issuer: "letsencrypt-prod"
-# spec:
-#   rules:
-#   - host: .elb.ap-south-1.amazonaws.com
-#     http:
-#       paths:
-#       - path: /api
-#         backend:
-#             serviceName: anakin-api
-#             servicePort: 8000
-#   tls:
-#   - secretName: cueapp-tls-cert
-#     hosts:
-#       - .elb.ap-south-1.amazonaws.com
-
 ---
 
 apiVersion: networking.k8s.io/v1
@@ -75,9 +51,10 @@ kind: Ingress
 metadata:
   name: anakin-ingress
   annotations:
-    nginx.ingress.kubernetes.io/rewrite-target: /
+    kubernetes.io/ingress.class: nginx
+    kubernetes.io/tls-acme: "true"
+    cert-manager.io/cluster-issuer: "letsencrypt-prod"
 spec:
-  ingressClassName: anakin-ingress
   rules:
   - host: ad36d7fd768d44d0c9251bdeb86f489f-a3d9381b03a04826.elb.ap-south-1.amazonaws.com
     http:
@@ -87,6 +64,54 @@ spec:
         backend:
           service:
             name: anakin-api
-            port:
+            port: 
               number: 8000
+
+---
+
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: anakin-ingress
+#   annotations:
+#     kubernetes.io/ingress.class: nginx
+#     kubernetes.io/tls-acme: "true"
+#     cert-manager.io/cluster-issuer: "letsencrypt-prod"
+# spec:
+#   defaultBackend:
+#     service:
+#       name: anakin-api
+#       port:
+#         number: 8000
+#   ingressClassName: anakin-ingress
+#   rules:
+#   - host: "ad36d7fd768d44d0c9251bdeb86f489f-a3d9381b03a04826.elb.ap-south-1.amazonaws.com"
+#     http:
+#       paths:
+#       - path: /api
+#         pathType: ImplementationSpecific
+#         backend:
+#           service:
+#             name: anakin-api
+#             port:
+#               number: 8000
+
+
+# # ---
+# apiVersion: networking.k8s.io/v1
+# kind: Ingress
+# metadata:
+#   name: anakin-api
+# spec:
+#   rules:
+#   - host: "ad36d7fd768d44d0c9251bdeb86f489f-a3d9381b03a04826.elb.ap-south-1.amazonaws.com"
+#     http:
+#       paths:
+#       - pathType: ImplementationSpecific
+#         path: "/api"
+#         backend:
+#           service:
+#             name: anakin-api
+#             port:
+#               number: 8000
 
