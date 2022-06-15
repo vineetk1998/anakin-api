@@ -1,0 +1,212 @@
+[
+{
+  "model": "core.brand",
+  "pk": 1,
+  "fields": {
+    "name": "Nike"
+  }
+},
+{
+  "model": "core.brand",
+  "pk": 2,
+  "fields": {
+    "name": "Adidas"
+  }
+},
+{
+  "model": "core.brand",
+  "pk": 3,
+  "fields": {
+    "name": "Puma"
+  }
+},
+{
+  "model": "core.brand",
+  "pk": 4,
+  "fields": {
+    "name": "Levis"
+  }
+},
+{
+  "model": "core.retailer",
+  "pk": 1,
+  "fields": {
+    "name": "Max"
+  }
+},
+{
+  "model": "core.retailer",
+  "pk": 2,
+  "fields": {
+    "name": "Reliance"
+  }
+},
+{
+  "model": "core.retailer",
+  "pk": 3,
+  "fields": {
+    "name": "WestSide"
+  }
+},
+{
+  "model": "core.retailer",
+  "pk": 4,
+  "fields": {
+    "name": "Iconic"
+  }
+},
+{
+  "model": "core.retailstore",
+  "pk": 1,
+  "fields": {
+    "name": "Max Delhi",
+    "retailer": 1
+  }
+},
+{
+  "model": "core.retailstore",
+  "pk": 2,
+  "fields": {
+    "name": "Max Mumbai",
+    "retailer": 1
+  }
+},
+{
+  "model": "core.retailstore",
+  "pk": 3,
+  "fields": {
+    "name": "Reliance Delhi",
+    "retailer": 2
+  }
+},
+{
+  "model": "core.retailstore",
+  "pk": 4,
+  "fields": {
+    "name": "Reliance Pune",
+    "retailer": 2
+  }
+},
+{
+  "model": "core.retailstore",
+  "pk": 5,
+  "fields": {
+    "name": "WestSide Pune",
+    "retailer": 3
+  }
+},
+{
+  "model": "core.retailstore",
+  "pk": 6,
+  "fields": {
+    "name": "WestSide Bangalore",
+    "retailer": 3
+  }
+},
+{
+  "model": "core.retailstore",
+  "pk": 7,
+  "fields": {
+    "name": "Iconic Delhi",
+    "retailer": 4
+  }
+},
+{
+  "model": "core.product",
+  "pk": 1,
+  "fields": {
+    "name": "Nike Trousers",
+    "brand": 1
+  }
+},
+{
+  "model": "core.product",
+  "pk": 2,
+  "fields": {
+    "name": "Nike Cap",
+    "brand": 1
+  }
+},
+{
+  "model": "core.product",
+  "pk": 3,
+  "fields": {
+    "name": "Nike Tshirt",
+    "brand": 1
+  }
+},
+{
+  "model": "core.product",
+  "pk": 4,
+  "fields": {
+    "name": "Adidas Trousers",
+    "brand": 2
+  }
+},
+{
+  "model": "core.product",
+  "pk": 5,
+  "fields": {
+    "name": "Adidas Cap",
+    "brand": 2
+  }
+},
+{
+  "model": "core.product",
+  "pk": 6,
+  "fields": {
+    "name": "Adidas Tshirt",
+    "brand": 2
+  }
+},
+{
+  "model": "core.product",
+  "pk": 7,
+  "fields": {
+    "name": "Levis Jeans",
+    "brand": 4
+  }
+},
+{
+  "model": "core.product",
+  "pk": 8,
+  "fields": {
+    "name": "Levis Shirt",
+    "brand": 4
+  }
+},
+{
+  "model": "core.product",
+  "pk": 9,
+  "fields": {
+    "name": "Levis Jacket",
+    "brand": 4
+  }
+},
+{
+  "model": "core.product",
+  "pk": 10,
+  "fields": {
+    "name": "Puma Shoes",
+    "brand": 3
+  }
+},
+{
+  "model": "core.product",
+  "pk": 11,
+  "fields": {
+    "name": "Puma Shorts",
+    "brand": 3
+  }
+},
+{
+  "model": "core.productinstore",
+  "pk": 1,
+  "fields": {
+    "retailStore": 1,
+    "product": 1,
+    "promotion": null,
+    "availaible": true
+  }
+}
+]
