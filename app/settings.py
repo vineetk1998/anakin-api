@@ -67,13 +67,16 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    "allauth",
+    "django.contrib.sites",
+    "allauth.account",
     'user',
     'core'
 ]
 
 #Authentication backends
 AUTHENTICATION_BACKENDS = (
-        'django.contrib.auth.backends.ModelBackend',
+        "allauth.account.auth_backends.AuthenticationBackend",
     )
 
 
@@ -85,6 +88,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    "app.middlewares.DisableCsrfCheck",
+    "app.middlewares.LoginRequiredMiddleware",  
 ]
 
 ROOT_URLCONF = 'app.urls'

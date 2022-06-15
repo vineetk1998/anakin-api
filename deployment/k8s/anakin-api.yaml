@@ -14,14 +14,19 @@ spec:
   template:
     metadata:
       labels:
-        app: celery-beat
+        app: anakin-api
     spec:
       containers:
-        image: vineetk1998/anakin-api:tagname
-        name: anakin-api
+        - image: vineetk1998/anakin-api:latest
+          name: anakin-api
+          ports: 
+            - containerPort: 8000
+              protocol: TCP
+
       restartPolicy: Always
 status: {}
 
+---
 
 apiVersion: v1
 kind: Service
@@ -41,26 +46,47 @@ status:
 
 
 
-# Source: cueapp/templates/ingress.yaml
-apiVersion: extensions/v1beta1
+# apiVersion: extensions/v1beta1
+# kind: Ingress
+# metadata:
+#   name: anakin-ingress
+#   annotations:
+#     kubernetes.io/ingress.class: nginx
+#     kubernetes.io/tls-acme: "true"
+#     cert-manager.io/cluster-issuer: "letsencrypt-prod"
+# spec:
+#   rules:
+#   - host: .elb.ap-south-1.amazonaws.com
+#     http:
+#       paths:
+#       - path: /api
+#         backend:
+#             serviceName: anakin-api
+#             servicePort: 8000
+#   tls:
+#   - secretName: cueapp-tls-cert
+#     hosts:
+#       - .elb.ap-south-1.amazonaws.com
+
+---
+
+apiVersion: networking.k8s.io/v1
 kind: Ingress
 metadata:
   name: anakin-ingress
   annotations:
-    kubernetes.io/ingress.class: nginx
-    kubernetes.io/tls-acme: "true"
-    cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/rewrite-target: /
 spec:
+  ingressClassName: anakin-ingress
   rules:
-  - host: a53a3eb10092e4e5b85b89d85dde452a-6bf47be1e6bcff40.elb.ap-south-1.amazonaws.com
+  - host: ad36d7fd768d44d0c9251bdeb86f489f-a3d9381b03a04826.elb.ap-south-1.amazonaws.com
     http:
       paths:
       - path: /api
+        pathType: ImplementationSpecific
         backend:
-            serviceName: anakin-api
-            servicePort: 8000
-  tls:
-  - secretName: cueapp-tls-cert
-    hosts:
-      - a53a3eb10092e4e5b85b89d85dde452a-6bf47be1e6bcff40.elb.ap-south-1.amazonaws.com
+          service:
+            name: anakin-api
+            port:
+              number: 8000
 

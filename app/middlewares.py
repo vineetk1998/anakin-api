@@ -34,8 +34,10 @@ class LoginRequiredMiddleware:
         """
         Process view method to check login_exempt decorator and enforce authentication on all views
         """
-
         if getattr(view_func, "login_exempt", False):
+            return
+
+        if request.user.is_authenticated:
             return
 
         return HttpResponse('Unauthorized', status=401)
