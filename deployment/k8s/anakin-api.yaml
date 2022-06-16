@@ -54,6 +54,13 @@ metadata:
     kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
     cert-manager.io/cluster-issuer: "letsencrypt-prod"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "1800"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "1800"
+    nginx.ingress.kubernetes.io/rewrite-target: /
+    nginx.ingress.kubernetes.io/secure-backends: "true"
+    nginx.ingress.kubernetes.io/ssl-redirect: "true"
+    nginx.ingress.kubernetes.io/websocket-services: anakin-api
+    nginx.org/websocket-services: anakin-api
 spec:
   rules:
   - host: ad36d7fd768d44d0c9251bdeb86f489f-a3d9381b03a04826.elb.ap-south-1.amazonaws.com
