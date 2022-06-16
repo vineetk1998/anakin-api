@@ -19,7 +19,7 @@ python3.7 -m venv env     # install python3.7 based virtual environment
 source env/bin/activate   # activate virtual environment
 pip -i requirements.txt
 python manage.py loaddata seeddata.json
-python manage.py runserver
+gunicorn app.asgi:application -k uvicorn.workers.UvicornWorker 
 ```
 
 ### To migrate db changes
