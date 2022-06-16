@@ -1,5 +1,6 @@
 import json
 from channels.generic.websocket import WebsocketConsumer
+from channels.layers import get_channel_layer
 from asgiref.sync import async_to_sync
 
 class ChatConsumer(WebsocketConsumer):
@@ -24,13 +25,15 @@ class ChatConsumer(WebsocketConsumer):
 
 		print(message)
 
-		async_to_sync(self.channel_layer.group_send)(
-			self.room_group_name,
-			{
-				'type': 'chat_message',
-				'message': message
-			}
-		)
+		someOutsideFunc()
+
+		# async_to_sync(self.channel_layer.group_send)(
+		# 	self.room_group_name,
+		# 	{
+		# 		'type': 'chat_message',
+		# 		'message': message
+		# 	}
+		# )
 
 	def chat_message(self, event):
 		message = event['message']
@@ -40,3 +43,9 @@ class ChatConsumer(WebsocketConsumer):
 			}))
 
 
+def someOutsideFunc():
+    channel_layer = get_channel_layer()
+    async_to_sync(channel_layer.group_send)(
+        'test',
+        {'type': 'chat_message', 'message': "je baat"}
+    )
