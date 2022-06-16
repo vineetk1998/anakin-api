@@ -112,6 +112,9 @@ Python Django based application with ReST api exposed.
       available: True|False
      }
   ```
+  
+## CI-CD
+There's a continuous deployment in place using [Github Actions](https://github.com/vineetk1998/anakin-api/actions) and the code for it can found [here](https://github.com/vineetk1998/anakin-api/tree/main/.github/workflows).
 
 ## Run Locally
 Prerequisite: docker
