@@ -1,6 +1,117 @@
 # anakin-api
 Python Django based application with ReST api exposed.
 
+# Design Overview
+* Project contains two django apps - User(Authentication) & Core(Everything else).
+* Table *ProductInStore* is supposed to contain the reference to product and store it is in with it's availability and running promotion.
+* Promotion is supposed to discount for now, hence should be an integer. So drop in price is equivalent to increase in promotion.
+
+
+# API 
+* get products
+  ```
+  Endpoint: <host>/api/product
+  RequestMethod: GET
+  QueryParams: 
+    offset: integer(default=0)
+    limit: integer(default=100)
+  Auth: Not Required
+  Response: {	
+    status: True|False,
+    message: Generic description of the error condition in English.
+    data: [
+      {
+        name: string- name of product,
+        brand: string- name of brand of product
+      },
+      {
+      }
+    ]
+  }
+  
+  ```
+* get retailStore for product
+  ```
+  Endpoint: <host>/api/retailStore
+  RequestMethod: GET
+  QueryParams:
+    product: string
+  Auth: Not Required
+  Response: {	
+    status: True|False,
+    message: Generic description of the error condition in English.
+    data: [
+      {
+        retailStore: string- name of retail Store,
+        product: string- name of brand of product,
+        promotion: string - discount value running,
+        available: True|False
+      },
+      {
+      }
+    ]
+  }
+  ```
+  
+* register user
+  ```
+  Endpoint: <host>/api/user
+  RequestMethod: POST
+  Request: {
+    username: string - unique,
+    password: string
+  }
+  Response: {
+    status: True|False,
+    message: Generic description of the error condition in English.
+  }
+  
+  ```
+
+
+* login user
+  ```
+  Endpoint: <host>/api/user
+  RequestMethod: POST
+  Request: {
+    username: string - unique,
+    password: string
+  }
+  Response: {
+    status: True|False,
+    message: Generic description of the error condition in English.
+  }
+  ```
+
+* update promotion
+  ```
+  Endpoint: <host>/api/promotion
+  RequestMethod: PATCH
+  Auth: Required
+  Request: {
+    retailStore: string,
+    product: string,
+    promotion: integer
+  }
+  Response: {
+    status: True|False,
+    message: Generic description of the error condition in English.
+  }
+  ```
+
+* get notification
+  ```
+  Endpoint: <host>/ws/notification
+  Response: {
+    type: notification,
+    message: price drop,
+    data: {
+      retailStore: string- name of retail Store,
+      product: string- name of brand of product,
+      promotion: string - discount value running,
+      available: True|False
+     }
+  ```
 
 ## Run Locally
 Prerequisite: docker
