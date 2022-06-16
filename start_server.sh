@@ -8,4 +8,5 @@ chown -R www-data:www-data db
 # mkdir /home/staticfiles
 # mv static_root/* /home/staticfiles
 # rm -rf static_root/
-gunicorn app.asgi --user www-data --bind 0.0.0.0:8000 --workers 3 --timeout 300
+# gunicorn app.asgi --user www-data --bind 0.0.0.0:8000 --workers 3 --timeout 300
+gunicorn app.asgi:application -k uvicorn.workers.UvicornWorker --user www-data --bind 0.0.0.0:8000 --workers 3 --timeout 300
