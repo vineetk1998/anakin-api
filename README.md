@@ -3,7 +3,7 @@ Python Django based application with ReST api exposed.
 
 # Design Overview
 * Project contains two django apps - User(Authentication) & Core(Everything else).
-* Table *ProductInStore* is supposed to contain the reference to product and store it is in with it's availability and running promotion.
+* Table *ProductInStore* is supposed to contain the reference to product and store it is in with its availability and running promotion.
 * Promotion is supposed to discount for now, hence should be an integer. So drop in price is equivalent to increase in promotion.
 
 
