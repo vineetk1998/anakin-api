@@ -59,7 +59,7 @@ spec:
   - host: ad36d7fd768d44d0c9251bdeb86f489f-a3d9381b03a04826.elb.ap-south-1.amazonaws.com
     http:
       paths:
-      - path: /api
+      - path: /
         pathType: ImplementationSpecific
         backend:
           service:
